@@ -157,9 +157,10 @@ class Sequential(Layer):
 
     def set_weights(self, weights):
         for i in range(len(self.layers)):
-            nb_param = len(self.layers[i].trainable_weights) + len(self.layers[i].non_trainable_weights)
+            nb_param = len(self.layers[i].get_weights())
             self.layers[i].set_weights(weights[:nb_param])
             weights = weights[nb_param:]
+        assert len(weights) == 0
 
     def get_config(self):
         return {'name': self.__class__.__name__,
@@ -535,3 +536,4 @@ class Graph(Layer):
             nb_param = len(layer.get_weights())
             layer.set_weights(weights[:nb_param])
             weights = weights[nb_param:]
+        assert len(weights) == 0

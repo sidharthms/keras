@@ -166,7 +166,7 @@ class BaseLogger(Callback):
 
         # skip progbar update for the last batch;
         # will be handled by on_epoch_end
-        if self.verbose and self.seen < self.params['nb_sample']:
+        if self.verbose > 1 and self.seen < self.params['nb_sample']:
             self.progbar.update(self.seen, self.log_values)
 
     def on_epoch_end(self, epoch, logs={}):
